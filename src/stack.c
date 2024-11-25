@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:57:58 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/25 19:20:05 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:41:10 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	swap(t_stack *stack)
 
 void	print_stack(t_stack *stack)
 {
-	t_stack	*current;
+	t_node	*current;
 
 	current = stack->top;
 	ft_printf("Stack (top to bottom):\n");
