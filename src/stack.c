@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:57:58 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 14:56:45 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:16:13 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	push(t_stack *stack, int value)
 	new_node->next = stack->top;
 	stack->top = new_node;
 	stack->size++;
-	update_min(stack, value);
-	update_max(stack, value);
+	if (value < stack->min)
+		stack->min = value;
+	if (value > stack->max)
+		stack->max = value;
 }
 
 int	pop(t_stack *stack)
