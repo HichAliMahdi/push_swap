@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/25 19:40:43 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:56:58 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../ft_printf/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_node
 {

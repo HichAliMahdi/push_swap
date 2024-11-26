@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:57:58 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/25 19:41:10 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:49:35 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ t_stack	*init_stack(void)
 	t_stack	*stack;
 
 	stack = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack)
+	{
+		ft_printf("Error: Failed to allocate memory for stack.\n");
+		exit(EXIT_FAILURE);
+	}
 	stack->top = NULL;
 	stack->size = 0;
 	return (stack);

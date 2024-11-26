@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:20:17 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/25 19:21:20 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:50:26 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_stack(t_stack *stack)
 {
+	if (!stack)
+		return ;
 	while (stack->size > 0)
 		pop(stack);
 	free(stack);
