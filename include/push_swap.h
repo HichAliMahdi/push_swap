@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 15:15:09 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:37:58 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_stack
 {
 	t_node	*top;
 	int		size;
+	int		min;
+	int		max;
 }	t_stack;
 
 typedef struct s_partition
@@ -57,11 +59,17 @@ int		has_duplicates_in_split(char **numbers);
 // Sorting Utilities
 int		is_sorted(t_stack *stack);
 void	quick_sort_stack(t_stack *a, t_stack *b, int len);
-void	quick_sort_partition(t_stack *a, t_stack *b, int len, t_partition *partition);
+void	quick_sort_partition(t_stack *a, t_stack *b,
+			int len, t_partition *partition);
 void	sort_3(t_stack *stack);
 void	sort_5(t_stack *stack_a, t_stack *stack_b);
 int		find_smallest(t_stack *stack);
 int		find_largest(t_stack *stack);
+int		find_median(t_stack *stack, int len);
+
+// stack utils
+void	update_min_max(t_stack *stack);
+int		get_position(t_stack *stack, int value);
 int		find_median(t_stack *stack, int len);
 
 // Main Logic

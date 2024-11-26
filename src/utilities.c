@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 02:14:48 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 15:04:50 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:23:47 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@ int	find_smallest(t_stack *stack)
 	return (smallest);
 }
 
-void	sort_3(t_stack *stack)
-{
-	if (stack->top->value > stack->top->next->value)
-		swap(stack);
-	if (!is_sorted(stack))
-		rotate(stack, "ra");
-	if (!is_sorted(stack))
-		reverse_rotate(stack, "rra");
-}
-
 void	exit_error(t_stack *stack, char **split)
 {
 	if (split)
@@ -60,4 +50,25 @@ void	update_max(t_stack *stack, int value)
 {
 	if (value > stack->max)
 		stack->max = value;
+}
+
+void	sort_5(t_stack *stack_a, t_stack *stack_b)
+{
+	int	smallest_pos;
+
+	while (stack_a->size > 3)
+	{
+		smallest_pos = get_position(stack_a, find_smallest(stack_a));
+		while (stack_a->top->value != find_smallest(stack_a))
+		{
+			if (smallest_pos <= stack_a->size / 2)
+				rotate(stack_a, "ra");
+			else
+				reverse_rotate(stack_a, "rra");
+		}
+		push_to(stack_a, stack_b, "pb");
+	}
+	sort_3(stack_a);
+	while (stack_b->size > 0)
+		push_to(stack_b, stack_a, "pa");
 }

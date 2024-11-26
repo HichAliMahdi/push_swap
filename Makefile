@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 19:29:07 by hali-mah          #+#    #+#              #
-#    Updated: 2024/11/26 02:33:21 by hali-mah         ###   ########.fr        #
+#    Updated: 2024/11/26 15:38:32 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/sorting.c \
 			$(SRC_DIR)/utilities.c \
 			$(SRC_DIR)/ft_split.c \
+			$(SRC_DIR)/stack_utils.c \
 			$(SRC_DIR)/validation.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)

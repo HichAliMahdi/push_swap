@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 02:11:14 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 15:18:11 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:26:49 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	sort_small_stack(t_stack *stack_a, t_stack *stack_b)
 		quick_sort_stack(stack_a, stack_b, stack_a->size);
 }
 
-vvoid	quick_sort_stack(t_stack *a, t_stack *b, int len)
+void	quick_sort_stack(t_stack *a, t_stack *b, int len)
 {
 	t_partition	partition;
 
