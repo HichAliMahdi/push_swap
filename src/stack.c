@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:57:58 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 01:49:35 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:56:45 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_stack	*init_stack(void)
 	}
 	stack->top = NULL;
 	stack->size = 0;
+	stack->min = INT_MAX;
+	stack->max = INT_MIN;
 	return (stack);
 }
 
@@ -32,10 +34,14 @@ void	push(t_stack *stack, int value)
 	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
+	if (!new_node)
+		exit_error(stack, NULL);
 	new_node->value = value;
 	new_node->next = stack->top;
 	stack->top = new_node;
 	stack->size++;
+	update_min(stack, value);
+	update_max(stack, value);
 }
 
 int	pop(t_stack *stack)
@@ -50,6 +56,7 @@ int	pop(t_stack *stack)
 	stack->top = stack->top->next;
 	free(temp);
 	stack->size--;
+	update_min_max(stack);
 	return (value);
 }
 
@@ -65,6 +72,7 @@ void	swap(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	stack->top = second;
+	ft_printf("sa\n");
 }
 
 void	print_stack(t_stack *stack)

@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:20:17 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 02:28:57 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:58:29 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 void	free_stack(t_stack *stack)
 {
+	t_node	*current;
+	t_node	*temp;
+
+	current = stack->top;
 	if (!stack)
 		return ;
-	while (stack->size > 0)
-		pop(stack);
+	while (current)
+	{
+		temp = current;
+		current = current -> next;
+		free(temp);
+	}
 	free(stack);
 }
 

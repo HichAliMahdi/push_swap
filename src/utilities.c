@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 02:14:48 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 02:50:16 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:04:50 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,16 @@ void	exit_error(t_stack *stack, char **split)
 		free_stack(stack);
 	ft_printf("Error\n");
 	exit(1);
+}
+
+void	update_min(t_stack *stack, int value)
+{
+	if (value < stack->min)
+		stack->min = value;
+}
+
+void	update_max(t_stack *stack, int value)
+{
+	if (value > stack->max)
+		stack->max = value;
 }
