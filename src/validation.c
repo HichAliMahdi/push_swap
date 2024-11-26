@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_stack.c                                       :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 19:20:17 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 02:28:57 by hali-mah         ###   ########.fr       */
+/*   Created: 2024/11/26 02:07:56 by hali-mah          #+#    #+#             */
+/*   Updated: 2024/11/26 02:30:33 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	free_stack(t_stack *stack)
+int	is_valid_number(char *str)
 {
-	if (!stack)
-		return ;
-	while (stack->size > 0)
-		pop(stack);
-	free(stack);
+	long	num;
+	char	*endptr;
+
+	if (!str || *str == '\0')
+		return (0);
+	num = strtol(str, &endptr, 10);
+	if (*endptr != '\0')
+		return (0);
+	if (num < INT_MIN || num > INT_MAX)
+		return (0);
+	return (1);
 }
 
-void	free_split(char **split)
+int	has_duplicates(char **argv, int argc)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (split[i])
+	i = 1;
+	while (i < argc)
 	{
-		free(split[i]);
+		j = i + 1;
+		while (j < argc)
+		{
+			if (atoi(argv[i]) == atoi(argv[j]))
+				return (1);
+			j++;
+		}
 		i++;
 	}
-	free(split);
+	return (0);
 }
