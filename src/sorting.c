@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 02:11:14 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 15:26:49 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/27 01:13:43 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,52 +28,6 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-void	sort_small_stack(t_stack *stack_a, t_stack *stack_b)
-{
-	if (stack_a->size <= 3)
-		sort_3(stack_a);
-	else if (stack_a->size <= 5)
-		sort_5(stack_a, stack_b);
-	else
-		quick_sort_stack(stack_a, stack_b, stack_a->size);
-}
-
-void	quick_sort_stack(t_stack *a, t_stack *b, int len)
-{
-	t_partition	partition;
-
-	if (len <= 3)
-	{
-		sort_3(a);
-		return ;
-	}
-	partition.pushed = 0;
-	partition.rotated = 0;
-	quick_sort_partition(a, b, len, &partition);
-	quick_sort_stack(a, b, len - partition.pushed);
-	quick_sort_stack(b, a, partition.pushed);
-	while (partition.pushed--)
-		push_to(b, a, "pa");
-}
-
-void	quick_sort_partition(t_stack *a, t_stack *b,
-		int len, t_partition *partition)
-{
-	while (partition->pushed + partition->rotated < len)
-	{
-		if (a->top->value < find_median(a, len))
-		{
-			push_to(a, b, "pb");
-			partition->pushed++;
-		}
-		else
-		{
-			rotate(a, "ra");
-			partition->rotated++;
-		}
-	}
-}
-
 void	sort_3(t_stack *stack)
 {
 	if (stack->size <= 1)
@@ -84,13 +38,31 @@ void	sort_3(t_stack *stack)
 			swap(stack);
 		return ;
 	}
-	while (!is_sorted(stack))
+	if (stack->top->value > stack->top->next->value)
+		swap(stack);
+	if (!is_sorted(stack))
+		rotate(stack, "ra");
+	if (!is_sorted(stack))
+		reverse_rotate(stack, "rra");
+}
+
+void	sort_5(t_stack *stack_a, t_stack *stack_b)
+{
+	int	smallest_pos;
+
+	while (stack_a->size > 3)
 	{
-		if (stack->top->value > stack->top->next->value)
-			swap(stack);
-		if (!is_sorted(stack))
-			rotate(stack, "ra");
-		if (!is_sorted(stack))
-			reverse_rotate(stack, "rra");
+		smallest_pos = get_position(stack_a, find_smallest(stack_a));
+		while (stack_a->top->value != find_smallest(stack_a))
+		{
+			if (smallest_pos <= stack_a->size / 2)
+				rotate(stack_a, "ra");
+			else
+				reverse_rotate(stack_a, "rra");
+		}
+		push_to(stack_a, stack_b, "pb");
 	}
+	sort_3(stack_a);
+	while (stack_b->size > 0)
+		push_to(stack_b, stack_a, "pa");
 }

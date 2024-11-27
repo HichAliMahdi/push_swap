@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 15:37:58 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/27 01:16:56 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b);
 int		find_smallest(t_stack *stack);
 int		find_largest(t_stack *stack);
 int		find_median(t_stack *stack, int len);
+void	push_chunk(t_stack *a, t_stack *b, int min, int chunk_size);
+void	push_back_sorted(t_stack *a, t_stack *b);
+void	sort_large(t_stack *a, t_stack *b);
+void	choose_sort_method(t_stack *a, t_stack *b);
 
 // stack utils
 void	update_min_max(t_stack *stack);
@@ -79,5 +83,4 @@ void	free_split(char **split);
 void	exit_error(t_stack *stack, char **split);
 void	update_min_max(t_stack *stack);
 int		get_position(t_stack *stack, int value);
-char	**ft_split(char const *s, char c);
 #endif

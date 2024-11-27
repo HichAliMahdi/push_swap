@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:22:38 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/26 15:24:25 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/27 00:30:01 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_and_sort(int argc, char **argv)
 		i--;
 	}
 	if (!is_sorted(stack_a))
-		sort_5(stack_a, stack_b);
+		choose_sort_method(stack_a, stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
 }
