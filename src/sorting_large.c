@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 00:27:13 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/27 00:28:46 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/27 01:34:12 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,15 @@ void	sort_large(t_stack *a, t_stack *b)
 {
 	int	chunk_size;
 	int	min;
+	int	total_size;
 
-	chunk_size = 15;
-	if (a->size > 100)
-		chunk_size = 30;
+	total_size = a->size;
+	if (total_size <= 100)
+		chunk_size = total_size / 5;
+	else
+		chunk_size = total_size / 11;
+	if (chunk_size < 15)
+		chunk_size = 15;
 	min = a->min;
 	while (a->size > 0)
 	{

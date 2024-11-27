@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/27 01:16:56 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/27 01:25:21 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_stack	*init_stack(void);
 void	push(t_stack *stack, int value);
 int		pop(t_stack *stack);
 int		peek(t_stack *stack);
-void	swap(t_stack *stack);
+void	swap(t_stack *stack, char *operation);
 void	rotate(t_stack *stack, char *operation);
 void	reverse_rotate(t_stack *stack, char *operation);
 void	push_to(t_stack *from, t_stack *to, char *operation);

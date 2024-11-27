@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 02:11:14 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/27 01:13:43 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/27 01:31:02 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,6 @@ int	is_sorted(t_stack *stack)
 		current = current->next;
 	}
 	return (1);
-}
-
-void	sort_3(t_stack *stack)
-{
-	if (stack->size <= 1)
-		return ;
-	if (stack->size == 2)
-	{
-		if (stack->top->value > stack->top->next->value)
-			swap(stack);
-		return ;
-	}
-	if (stack->top->value > stack->top->next->value)
-		swap(stack);
-	if (!is_sorted(stack))
-		rotate(stack, "ra");
-	if (!is_sorted(stack))
-		reverse_rotate(stack, "rra");
 }
 
 void	sort_5(t_stack *stack_a, t_stack *stack_b)

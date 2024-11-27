@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 19:29:07 by hali-mah          #+#    #+#              #
-#    Updated: 2024/11/27 00:57:13 by hali-mah         ###   ########.fr        #
+#    Updated: 2024/11/27 01:34:46 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/operations.c \
 			$(SRC_DIR)/sorting.c \
 			$(SRC_DIR)/sorting_large.c \
+			$(SRC_DIR)/sort_3.c \
 			$(SRC_DIR)/sort_utils.c \
 			$(SRC_DIR)/utilities.c \
 			$(SRC_DIR)/stack_utils.c \

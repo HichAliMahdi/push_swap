@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:57:58 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/27 01:17:12 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/27 01:20:28 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	pop(t_stack *stack)
 	return (value);
 }
 
-void	swap(t_stack *stack)
+void	swap(t_stack *stack, char *operation)
 {
 	t_node	*first;
 	t_node	*second;
@@ -74,7 +74,7 @@ void	swap(t_stack *stack)
 	first->next = second->next;
 	second->next = first;
 	stack->top = second;
-	ft_printf("sa\n");
+	ft_printf("%s\n", operation);
 }
 
 void	print_stack(t_stack *stack)
