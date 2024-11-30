@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 14:38:23 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:51:28 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,59 +26,6 @@ int	stack_size(t_stack *stack)
 		current = current->next;
 	}
 	return (size);
-}
-
-void	selection_sort(int *arr, int size)
-{
-	int	i;
-	int	j;
-	int	min_index;
-	int	temp;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		min_index = i;
-		j = i + 1;
-		while (j < size)
-		{
-			if (arr[j] < arr[min_index])
-				min_index = j;
-			j++;
-		}
-		if (min_index != i)
-		{
-			temp = arr[i];
-			arr[i] = arr[min_index];
-			arr[min_index] = temp;
-		}
-		i++;
-	}
-}
-
-int	find_median(t_stack *stack, int k)
-{
-	int		size;
-	int		*arr;
-	int		i;
-	int		median;
-	t_stack	*current;
-
-	i = 0;
-	size = stack_size(stack);
-	arr = (int *)malloc(size * sizeof(int));
-	if (!arr)
-		return (0);
-	current = stack;
-	while (current)
-	{
-		arr[i++] = current->value;
-		current = current->next;
-	}
-	selection_sort(arr, size);
-	median = arr[k];
-	free(arr);
-	return (median);
 }
 
 int	ft_atoi(const char *str)
