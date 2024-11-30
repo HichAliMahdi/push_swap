@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 19:29:07 by hali-mah          #+#    #+#              #
-#    Updated: 2024/11/27 01:34:46 by hali-mah         ###   ########.fr        #
+#    Updated: 2024/11/30 04:27:31 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,40 +14,58 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_DIR = src
-SRC_FILES = $(SRC_DIR)/main.c \
-            $(SRC_DIR)/stack.c \
-			$(SRC_DIR)/free_stack.c \
-			$(SRC_DIR)/operations.c \
-			$(SRC_DIR)/sorting.c \
-			$(SRC_DIR)/sorting_large.c \
-			$(SRC_DIR)/sort_3.c \
-			$(SRC_DIR)/sort_utils.c \
-			$(SRC_DIR)/utilities.c \
-			$(SRC_DIR)/stack_utils.c \
-			$(SRC_DIR)/validation.c
-
-OBJ_FILES = $(SRC_FILES:.c=.o)
-
+# Directories for source files
+OPERATIONS_DIR = operations
+SORTING_DIR = sorting
+UTILS_DIR = utils
 PRINTF_DIR = ft_printf
 
-all: $(NAME)
+# Source files
+OPE_FILES = $(OPERATIONS_DIR)/push_operations.c \
+			$(OPERATIONS_DIR)/r_rotate_operations.c \
+			$(OPERATIONS_DIR)/rotate_operations.c \
+			$(OPERATIONS_DIR)/stack_operations.c \
+			$(OPERATIONS_DIR)/swap_operations.c
 
-$(NAME): $(OBJ_FILES)
+SOR_FILES = $(SORTING_DIR)/sorting_logic.c
+
+UTI_FILES = $(UTILS_DIR)/stack_utilities.c
+
+# Main source file
+SRC = main.c
+
+# All source files
+SRCS = $(SRC) $(OPE_FILES) $(SOR_FILES) $(UTI_FILES)
+
+# Object files
+OBJ = $(SRCS:.c=.o)
+
+# Library
+LIBFTPRINTF = $(PRINTF_DIR)/libftprintf.a
+
+# Output name
+$(NAME): $(OBJ) $(LIBFTPRINTF)
+	$(CC) $(OBJ) -o $(NAME) -L$(PRINTF_DIR) -lftprintf
+
+# Rule to build ft_printf
+$(LIBFTPRINTF):
 	make -C $(PRINTF_DIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) -L$(PRINTF_DIR) -lftprintf
 
+# Rule to compile .c files to .o files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Clean object files
 clean:
-	rm -f $(OBJ_FILES)
-	make -C $(PRINTF_DIR) clean
+	rm -f $(OBJ)
+	make -C $(PRINTF_DIR) clean  # Clean ft_printf objects
 
+# Remove compiled executable
 fclean: clean
 	rm -f $(NAME)
-	make -C $(PRINTF_DIR) fclean
+	make -C $(PRINTF_DIR) fclean  # Clean ft_printf executable
 
-re: fclean all
+# Rebuild everything
+re: fclean $(NAME)
 
-.PHONY: all clean fclean re
+.PHONY: clean fclean re

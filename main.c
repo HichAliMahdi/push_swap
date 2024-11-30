@@ -5,49 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 19:22:38 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/27 00:30:01 by hali-mah         ###   ########.fr       */
+/*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
+/*   Updated: 2024/11/30 13:51:03 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "./include/push_swap.h"
 
-void	handle_errors(int argc, char **argv)
+void	parse_args(int argc, char **argv, t_stack **stack_a)
 {
-	if (argc < 2)
-		exit(EXIT_SUCCESS);
-	if (has_duplicates(argv, argc))
-	{
-		ft_printf("Error\n");
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	init_and_sort(int argc, char **argv)
-{
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	t_stack	*prev;
+	t_stack	*current;
+	int		value;
 	int		i;
 
-	stack_a = init_stack();
-	stack_b = init_stack();
-	i = argc - 1;
-	while (i > 0)
+	i = 1;
+	prev = NULL;
+	*stack_a = NULL;
+	while (i < argc)
 	{
-		if (!is_valid_number(argv[i]))
-			exit_error(stack_a, NULL);
-		push(stack_a, atoi(argv[i]));
-		i--;
+		value = ft_atoi(argv[i]);
+		current = create_node(value);
+		if (!*stack_a)
+			*stack_a = current;
+		else
+			prev->next = current;
+		prev = current;
+		i++;
 	}
-	if (!is_sorted(stack_a))
-		choose_sort_method(stack_a, stack_b);
-	free_stack(stack_a);
-	free_stack(stack_b);
 }
 
 int	main(int argc, char **argv)
 {
-	handle_errors(argc, argv);
-	init_and_sort(argc, argv);
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
+	if (argc < 2)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	stack_a = NULL;
+	stack_b = NULL;
+	parse_args(argc, argv, &stack_a);
+	sort_stack(&stack_a, &stack_b);
+	free_stack(stack_a);
+	free_stack(stack_b);
 	return (0);
 }

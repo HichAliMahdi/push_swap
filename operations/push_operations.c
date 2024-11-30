@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*   push_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 00:31:01 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/27 00:31:20 by hali-mah         ###   ########.fr       */
+/*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
+/*   Updated: 2024/11/30 04:52:53 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	choose_sort_method(t_stack *a, t_stack *b)
+// Push the top element of stack b to stack a
+void	pa(t_stack **stack_a, t_stack **stack_b)
 {
-	if (a->size <= 3)
-		sort_3(a);
-	else if (a->size <= 5)
-		sort_5(a, b);
-	else
-		sort_large(a, b);
+	t_stack	*top;
+
+	if (*stack_b)
+	{
+		top = *stack_b;
+		*stack_b = (*stack_b)->next;
+		push(stack_a, top);
+		ft_printf("pa\n");
+	}
+}
+
+void	pb(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack	*top;
+
+	if (*stack_a)
+	{
+		top = *stack_a;
+		*stack_a = (*stack_a)->next;
+		push(stack_b, top);
+		ft_printf("pb\n");
+	}
 }
