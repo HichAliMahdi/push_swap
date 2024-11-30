@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 13:46:01 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:44:43 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	free_stack(t_stack *stack);
 
 // Utils
 int		stack_size(t_stack *stack);
-int		compare_ints(const void *a, const void *b);
 void	selection_sort(int *arr, int size);
 int		find_median(t_stack *stack, int k);
 int		ft_atoi(const char *str);
+int		has_duplicate(t_stack *stack, int value);
 
 // Sorting
 void	sort_three(t_stack **stack);
@@ -59,6 +59,8 @@ void	sort_big(t_stack **stack_a, t_stack **stack_b);
 void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 
 // Main logic
+void	handle_error(t_stack **stack);
+void	add_to_stack(t_stack **stack, int value);
 void	parse_args(int argc, char **argv, t_stack **stack_a);
 int		main(int argc, char **argv);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 04:27:55 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/30 14:38:23 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ int	stack_size(t_stack *stack)
 		current = current->next;
 	}
 	return (size);
-}
-
-// Find the median value in the stack
-int	compare_ints(const void *a, const void *b)
-{
-	return (*(int *)a - *(int *)b);
 }
 
 void	selection_sort(int *arr, int size)
@@ -113,4 +107,15 @@ int	ft_atoi(const char *str)
 			return (INT_MIN);
 	}
 	return ((int)(result * sign));
+}
+
+int	has_duplicate(t_stack *stack, int value)
+{
+	while (stack)
+	{
+		if (stack->value == value)
+			return (1);
+		stack = stack->next;
+	}
+	return (0);
 }
