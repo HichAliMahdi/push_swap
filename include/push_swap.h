@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 14:44:43 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/01 00:28:33 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,27 @@ void	print_stack(t_stack *stack);
 int		is_sorted(t_stack *stack);
 void	free_stack(t_stack *stack);
 
-// Utils
+// Stack Utils
 int		stack_size(t_stack *stack);
-void	selection_sort(int *arr, int size);
-int		find_median(t_stack *stack, int k);
 int		ft_atoi(const char *str);
 int		has_duplicate(t_stack *stack, int value);
 
+// Sorting utils
+int		find_position(t_stack *stack, int value);
+int		find_min(t_stack *stack);
+int		find_max(t_stack *stack);
+
 // Sorting
 void	sort_three(t_stack **stack);
-void	find_and_push_min(t_stack **stack_a, t_stack **stack_b);
-void	sort_big(t_stack **stack_a, t_stack **stack_b);
+void	sort_four(t_stack **stack_a, t_stack **stack_b);
+void	sort_five(t_stack **stack_a, t_stack **stack_b);
 void	sort_stack(t_stack **stack_a, t_stack **stack_b);
+
+// Sorting large
+int		get_chunk_size(int size);
+void	push_chunks(t_stack **stack_a, t_stack **stack_b, int chunk_size);
+void	push_sorted(t_stack **stack_a, t_stack **stack_b);
+void	sort_large(t_stack **stack_a, t_stack **stack_b);
 
 // Main logic
 void	handle_error(t_stack **stack);

@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 13:45:54 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/30 22:35:24 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,46 +40,51 @@ void	sort_three(t_stack **stack)
 	}
 }
 
-void	find_and_push_min(t_stack **stack_a, t_stack **stack_b)
+void	sort_four(t_stack **stack_a, t_stack **stack_b)
 {
-	int		min;
-	t_stack	*temp;
-	int		pos;
-	int		size;
+	int	min;
+	int	pos;
 
-	min = INT_MAX;
-	temp = *stack_a;
-	pos = 0;
-	size = stack_size(*stack_a);
-	while (temp)
+	min = find_min(*stack_a);
+	pos = find_position(*stack_a, min);
+	while (pos > 0)
 	{
-		if (temp->value < min)
-			min = temp->value;
-		temp = temp->next;
-	}
-	while ((*stack_a)->value != min)
-	{
-		if (pos < size / 2)
+		if (pos <= 2)
 			ra(stack_a);
 		else
 			rra(stack_a);
+		pos = find_position(*stack_a, min);
 	}
 	pb(stack_a, stack_b);
+	sort_three(stack_a);
+	pa(stack_a, stack_b);
 }
 
-void	sort_big(t_stack **stack_a, t_stack **stack_b)
+void	sort_five(t_stack **stack_a, t_stack **stack_b)
 {
-	int	size;
+	int	min;
+	int	pos;
+	int	i;
 
-	size = stack_size(*stack_a);
-	while (size > 3)
+	i = 0;
+	while (i < 2)
 	{
-		find_and_push_min(stack_a, stack_b);
-		size--;
+		min = find_min(*stack_a);
+		pos = find_position(*stack_a, min);
+		while (pos > 0)
+		{
+			if (pos <= 2)
+				ra(stack_a);
+			else
+				rra(stack_a);
+			pos = find_position(*stack_a, min);
+		}
+		pb(stack_a, stack_b);
+		i++;
 	}
 	sort_three(stack_a);
-	while (*stack_b)
-		pa(stack_a, stack_b);
+	pa(stack_a, stack_b);
+	pa(stack_a, stack_b);
 }
 
 void	sort_stack(t_stack **stack_a, t_stack **stack_b)
@@ -98,6 +103,10 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 	}
 	else if (size == 3)
 		sort_three(stack_a);
+	else if (size == 4)
+		sort_four(stack_a, stack_b);
+	else if (size == 5)
+		sort_five(stack_a, stack_b);
 	else
-		sort_big(stack_a, stack_b);
+		sort_large(stack_a, stack_b);
 }

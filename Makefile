@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 19:29:07 by hali-mah          #+#    #+#              #
-#    Updated: 2024/11/30 04:27:31 by hali-mah         ###   ########.fr        #
+#    Updated: 2024/12/01 00:09:03 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,11 @@ OPE_FILES = $(OPERATIONS_DIR)/push_operations.c \
 			$(OPERATIONS_DIR)/stack_operations.c \
 			$(OPERATIONS_DIR)/swap_operations.c
 
-SOR_FILES = $(SORTING_DIR)/sorting_logic.c
+SOR_FILES = $(SORTING_DIR)/sorting_logic.c \
+			$(SORTING_DIR)/sorting_large.c
 
-UTI_FILES = $(UTILS_DIR)/stack_utilities.c
+UTI_FILES = $(UTILS_DIR)/stack_utilities.c \
+			$(UTILS_DIR)/sorting_utils.c
 
 # Main source file
 SRC = main.c

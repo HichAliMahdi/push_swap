@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 14:44:15 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/01 00:34:27 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	stack_b = NULL;
 	parse_args(argc, argv, &stack_a);
+	//ft_printf("\nNumbers to sort: ");
+	//print_stack(stack_a);
 	sort_stack(&stack_a, &stack_b);
+	//ft_printf("\nSorted numbers: ");
+	//print_stack(stack_a);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

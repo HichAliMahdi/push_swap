@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 04:52:49 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:38:41 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,18 @@ void	sa(t_stack **stack)
 // Swap the first two elements of stack b
 void	sb(t_stack **stack)
 {
-	sa(stack);
-	ft_printf("sb\n");
+	t_stack	*first;
+	t_stack	*second;
+
+	if (*stack && (*stack)->next)
+	{
+		first = *stack;
+		second = (*stack)->next;
+		first->next = second->next;
+		second->next = first;
+		*stack = second;
+		ft_printf("sb\n");
+	}
 }
 
 // Swap both stacks a and b

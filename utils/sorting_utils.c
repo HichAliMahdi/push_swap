@@ -1,59 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_operations.c                                :+:      :+:    :+:   */
+/*   sorting_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 19:34:26 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/30 22:41:27 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-// Rotate stack a
-void	ra(t_stack **stack)
+int	find_position(t_stack *stack, int value)
 {
-	t_stack	*top;
+	int		pos;
 	t_stack	*current;
 
-	if (*stack)
+	pos = 0;
+	current = stack;
+	while (current)
 	{
-		top = *stack;
-		current = *stack;
-		while (current->next)
-			current = current->next;
-		current->next = top;
-		*stack = top->next;
-		top->next = NULL;
-		ft_printf("ra\n");
+		if (current->value == value)
+			return (pos);
+		pos++;
+		current = current ->next;
 	}
+	return (-1);
 }
 
-// Rotate stack b
-void	rb(t_stack **stack)
+int	find_min(t_stack *stack)
 {
-	t_stack	*top;
-	t_stack	*current;
+	int	min;
 
-	if (*stack)
+	min = INT_MAX;
+	while (stack)
 	{
-		top = *stack;
-		current = *stack;
-		while (current->next)
-			current = current->next;
-		current->next = top;
-		*stack = top->next;
-		top->next = NULL;
-		ft_printf("rb\n");
+		if (stack->value < min)
+			min = stack->value;
+		stack = stack->next;
 	}
+	return (min);
 }
 
-// Rotate both stacks a and b
-void	rr(t_stack **stack_a, t_stack **stack_b)
+int	find_max(t_stack *stack)
 {
-	ra(stack_a);
-	rb(stack_b);
-	ft_printf("rr\n");
+	int	max;
+
+	max = INT_MIN;
+	while (stack)
+	{
+		if (stack->value > max)
+			max = stack->value;
+		stack = stack->next;
+	}
+	return (max);
 }

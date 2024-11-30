@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 04:51:05 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:33:09 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,26 @@ void	rra(t_stack **stack)
 // Reverse rotate stack b
 void	rrb(t_stack **stack)
 {
-	rra(stack);
-	ft_printf("rrb\n");
+	t_stack	*last;
+	t_stack	*prev;
+
+	if (*stack)
+	{
+		last = *stack;
+		prev = NULL;
+		while (last->next)
+		{
+			prev = last;
+			last = last->next;
+		}
+		if (prev)
+		{
+			prev->next = NULL;
+			last->next = *stack;
+			*stack = last;
+		}
+		ft_printf("rrb\n");
+	}
 }
 
 // Reverse rotate both stacks a and b
