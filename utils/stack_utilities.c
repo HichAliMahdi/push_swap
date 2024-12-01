@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 18:51:28 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/01 20:31:07 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	stack_size(t_stack *stack)
 	return (size);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, t_stack **stack)
 {
 	int		sign;
 	long	result;
@@ -49,9 +49,9 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 		if (result * sign > INT_MAX)
-			return (INT_MAX);
+			handle_error(stack);
 		if (result * sign < INT_MIN)
-			return (INT_MIN);
+			handle_error(stack);
 	}
 	return ((int)(result * sign));
 }

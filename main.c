@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/01 00:34:27 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:15:52 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	parse_args(int argc, char **argv, t_stack **stack_a)
 	*stack_a = NULL;
 	while (i < argc)
 	{
-		value = ft_atoi(argv[i]);
+		value = ft_atoi(argv[i], stack_a);
 		add_to_stack(stack_a, value);
 		i++;
 	}
@@ -59,6 +59,8 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
+	if (argc == 1)
+		return (0);
 	if (argc < 2)
 	{
 		write(2, "Error\n", 6);
