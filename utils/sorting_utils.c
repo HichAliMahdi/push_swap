@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/01 23:33:38 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:02:21 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,4 @@ int	find_max(t_stack *stack)
 		stack = stack->next;
 	}
 	return (max);
-}
-
-int	find_key_number(int *sorted_list, int total_size, int i, int division_size)
-{
-	int	start;
-	int	end;
-
-	end = i * (total_size / division_size);
-	start = (i - 1) * (total_size / division_size);
-	return (sorted_list[start]);
 }

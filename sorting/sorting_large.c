@@ -6,90 +6,103 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/01 23:59:03 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:33:20 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	push_chunk_hundred(t_stack **stack_a,
-			t_stack **stack_b, int *sorted, int chunk)
+int	get_chunk_size(int size)
 {
-	int	start;
-	int	end;
-	int	size;
+	if (size <= 50)
+		return (10);
+	else if (size <= 100)
+		return (15);
+	else if (size <= 250)
+		return (25);
+	else if (size <= 500)
+		return (35);
+	else
+		return (45);
+}
 
-	size = stack_size(*stack_a);
-	start = sorted[(size / 5) * chunk];
-	end = sorted[(size / 5) * (chunk + 1) - 1];
-	while (*stack_a)
+void	push_chunks(t_stack **stack_a, t_stack **stack_b, int chunk_size)
+{
+	int	min;
+	int	max;
+	int	pushed;
+	int	rotations;
+
+	min = find_min(*stack_a);
+	max = min + chunk_size;
+	rotations = 0;
+	pushed = 0;
+	while (*stack_a && pushed < chunk_size)
 	{
-		if ((*stack_a)->value >= start && (*stack_a)->value <= end)
+		if ((*stack_a)->value >= min && (*stack_a)->value <= max)
+		{
 			pb(stack_a, stack_b);
+			pushed++;
+			rotations = 0;
+			if ((*stack_b)->next
+				&& (*stack_b)->value > (*stack_b)->next->value)
+			{
+				if ((*stack_b)->value < min + (chunk_size / 2))
+					rb(stack_b);
+				else
+					sb(stack_b);
+			}
+		}
 		else
+		{
 			ra(stack_a);
-		if (!has_value_in_range(*stack_a, start, end))
-			break ;
+			rotations++;
+			if (rotations >= stack_size(*stack_a))
+				break ;
+		}
 	}
 }
 
-void	sort_hundred(t_stack **stack_a, t_stack **stack_b)
+void	push_sorted(t_stack **stack_a, t_stack **stack_b)
 {
-	int	*sorted;
-	int	chunk;
-	int	size;
+	int	max_val;
+	int	pos;
+	int	size_b;
 
-	size = stack_size(*stack_a);
-	sorted = create_sorted_array(*stack_a);
-	if (!sorted)
-		return ;
-	chunk = 0;
-	while (chunk < 5)
+	while (*stack_b)
 	{
-		push_chunk_hundred(stack_a, stack_b, sorted, chunk);
-		chunk++;
-	}
-	push_back_sorted(stack_a, stack_b);
-	free(sorted);
-}
-
-void	push_chunk_five_hundred(t_stack **stack_a, t_stack **stack_b,
-	int *sorted, int chunk)
-{
-	int	start;
-	int	end;
-	int	size;
-
-	size = stack_size(*stack_a);
-	start = sorted[(size / 11) * chunk];
-	end = sorted[(size / 11) * (chunk + 1) - 1];
-	while (*stack_a)
-	{
-		if ((*stack_a)->value >= start && (*stack_a)->value <= end)
-			pb(stack_a, stack_b);
+		max_val = find_max(*stack_b);
+		size_b = stack_size(*stack_b);
+		pos = find_position(*stack_b, max_val);
+		if (pos <= size_b / 2)
+		{
+			while ((*stack_b)->value != max_val)
+				rb(stack_b);
+		}
 		else
-			ra(stack_a);
-		if (!has_value_in_range(*stack_a, start, end))
-			break ;
+		{
+			while ((*stack_b)->value != max_val)
+				rrb(stack_b);
+		}
+		pa(stack_a, stack_b);
 	}
 }
 
-void	sort_five_hundred(t_stack **stack_a, t_stack **stack_b)
+void	sort_large(t_stack **stack_a, t_stack **stack_b)
 {
-	int		*sorted;
-	int		chunk;
-	int		size;
+	int	size;
+	int	chunk_size;
 
 	size = stack_size(*stack_a);
-	sorted = create_sorted_array(*stack_a);
-	if (!sorted)
-		return ;
-	chunk = 0;
-	while (chunk < 11)
+	chunk_size = get_chunk_size(size);
+	while (size > 3)
 	{
-		push_chunk_five_hundred(stack_a, stack_b, sorted, chunk);
-		chunk++;
+		push_chunks(stack_a, stack_b, chunk_size);
+		size = stack_size(*stack_a);
 	}
-	push_back_sorted(stack_a, stack_b);
-	free(sorted);
+	if (size == 3)
+		sort_three(stack_a);
+	else if (size == 2 && (*stack_a)->value > (*stack_a)->next->value)
+		sa(stack_a);
+	push_sorted(stack_a, stack_b);
 }

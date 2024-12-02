@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/01 23:39:49 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:24:51 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 		sort_four(stack_a, stack_b);
 	else if (size == 5)
 		sort_five(stack_a, stack_b);
-	else if (size == 100)
-		handle_hundred(stack_a, stack_b);
-	else if (size == 500)
-		handle_five_hundred(stack_a, stack_b);
+	else
+		sort_large(stack_a, stack_b);
 }

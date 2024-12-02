@@ -6,14 +6,12 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 00:00:21 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:33:34 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-#define MAX_NUMBERS 100
 
 # include "../ft_printf/ft_printf.h"
 # include <stdio.h>
@@ -24,6 +22,7 @@
 typedef struct s_stack
 {
 	int				value;
+	int				index;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -56,8 +55,6 @@ int		has_duplicate(t_stack *stack, int value);
 int		find_position(t_stack *stack, int value);
 int		find_min(t_stack *stack);
 int		find_max(t_stack *stack);
-int		find_key_number(int *sorted_list, int total_size,
-			int i, int division_size);
 
 // Sorting
 void	sort_three(t_stack **stack);
@@ -65,13 +62,11 @@ void	sort_four(t_stack **stack_a, t_stack **stack_b);
 void	sort_five(t_stack **stack_a, t_stack **stack_b);
 void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 
-// Sorting hundred && five hundred
-void	push_chunk_hundred(t_stack **stack_a,
-			t_stack **stack_b, int *sorted, int chunk);
-void	sort_hundred(t_stack **stack_a, t_stack **stack_b);
-void	push_chunk_five_hundred(t_stack **stack_a,
-			t_stack **stack_b, int *sorted, int chunk);
-void	sort_five_hundred(t_stack **stack_a, t_stack **stack_b);
+// Sorting large
+int		get_chunk_size(int size);
+void	push_chunks(t_stack **stack_a, t_stack **stack_b, int chunk_size);
+void	push_sorted(t_stack **stack_a, t_stack **stack_b);
+void	sort_large(t_stack **stack_a, t_stack **stack_b);
 
 // Main logic
 void	handle_error(t_stack **stack);
