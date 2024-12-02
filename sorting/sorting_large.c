@@ -6,103 +6,153 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 02:33:20 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:09:32 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	get_chunk_size(int size)
+static int get_min_index(t_stack *stack)
 {
-	if (size <= 50)
-		return (10);
-	else if (size <= 100)
-		return (15);
-	else if (size <= 250)
-		return (25);
-	else if (size <= 500)
-		return (35);
-	else
-		return (45);
+    t_stack *current;
+    int min_value;
+    int min_index;
+    
+    if (!stack)
+        return 0;
+    current = stack;
+    min_value = current->value;
+    min_index = current->pos;
+    
+    while (current)
+    {
+        if (current->value < min_value)
+        {
+            min_value = current->value;
+            min_index = current->pos;
+        }
+        current = current->next;
+    }
+    return min_index;
 }
 
-void	push_chunks(t_stack **stack_a, t_stack **stack_b, int chunk_size)
+void get_target_position_stack(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min;
-	int	max;
-	int	pushed;
-	int	rotations;
-
-	min = find_min(*stack_a);
-	max = min + chunk_size;
-	rotations = 0;
-	pushed = 0;
-	while (*stack_a && pushed < chunk_size)
-	{
-		if ((*stack_a)->value >= min && (*stack_a)->value <= max)
-		{
-			pb(stack_a, stack_b);
-			pushed++;
-			rotations = 0;
-			if ((*stack_b)->next
-				&& (*stack_b)->value > (*stack_b)->next->value)
-			{
-				if ((*stack_b)->value < min + (chunk_size / 2))
-					rb(stack_b);
-				else
-					sb(stack_b);
-			}
-		}
-		else
-		{
-			ra(stack_a);
-			rotations++;
-			if (rotations >= stack_size(*stack_a))
-				break ;
-		}
-	}
+    t_stack *current_b;
+    int target_pos;
+    int closest_bigger;
+    
+    current_b = stack_b;
+    while (current_b)
+    {
+        target_pos = get_min_index(stack_a);
+        closest_bigger = INT_MAX;
+        t_stack *current_a = stack_a;
+        while (current_a)
+        {
+            if (current_a->value > current_b->value && 
+                current_a->value < closest_bigger)
+            {
+                closest_bigger = current_a->value;
+                target_pos = current_a->pos;
+            }
+            current_a = current_a->next;
+        }
+        current_b->target_pos = target_pos;
+        current_b = current_b->next;
+    }
 }
 
-void	push_sorted(t_stack **stack_a, t_stack **stack_b)
+static void get_cost_stack(t_stack *stack_a, t_stack *stack_b)
 {
-	int	max_val;
-	int	pos;
-	int	size_b;
+    int size_a;
+    int size_b;
+    t_stack *current;
 
-	while (*stack_b)
-	{
-		max_val = find_max(*stack_b);
-		size_b = stack_size(*stack_b);
-		pos = find_position(*stack_b, max_val);
-		if (pos <= size_b / 2)
-		{
-			while ((*stack_b)->value != max_val)
-				rb(stack_b);
-		}
-		else
-		{
-			while ((*stack_b)->value != max_val)
-				rrb(stack_b);
-		}
-		pa(stack_a, stack_b);
-	}
+    size_a = stack_size(stack_a);
+    size_b = stack_size(stack_b);
+    current = stack_b;
+    
+    while (current)
+    {
+        // Calculate cost for stack B
+        if (current->pos <= size_b / 2)
+            current->cost_b = current->pos;
+        else
+            current->cost_b = -(size_b - current->pos);
+        
+        // Calculate cost for stack A
+        if (current->target_pos <= size_a / 2)
+            current->cost_a = current->target_pos;
+        else
+            current->cost_a = -(size_a - current->target_pos);
+        
+        current = current->next;
+    }
 }
 
-void	sort_large(t_stack **stack_a, t_stack **stack_b)
+static void get_cheapest_move(t_stack **stack_a, t_stack **stack_b)
 {
-	int	size;
-	int	chunk_size;
+    t_stack *current;
+    int cheapest_cost;
+    int cost_a;
+    int cost_b;
+    
+    current = *stack_b;
+    cheapest_cost = INT_MAX;
+    
+    while (current)
+    {
+        int total_cost = ft_abs(current->cost_a) + ft_abs(current->cost_b);
+        if (total_cost < cheapest_cost)
+        {
+            cheapest_cost = total_cost;
+            cost_a = current->cost_a;
+            cost_b = current->cost_b;
+        }
+        current = current->next;
+    }
+    
+    chose_and_do_rr_or_r(stack_a, stack_b, cost_a, cost_b);
+    pa(stack_a, stack_b);
+}
 
-	size = stack_size(*stack_a);
-	chunk_size = get_chunk_size(size);
-	while (size > 3)
-	{
-		push_chunks(stack_a, stack_b, chunk_size);
-		size = stack_size(*stack_a);
-	}
-	if (size == 3)
-		sort_three(stack_a);
-	else if (size == 2 && (*stack_a)->value > (*stack_a)->next->value)
-		sa(stack_a);
-	push_sorted(stack_a, stack_b);
+void sort_large(t_stack **stack_a, t_stack **stack_b)
+{
+    int size;
+    int pushed;
+    
+    size = stack_size(*stack_a);
+    pushed = 0;
+    
+    // Push all except 3 numbers to stack B
+    while (size > 3 && pushed < size - 3)
+    {
+        pb(stack_a, stack_b);
+        pushed++;
+    }
+    
+    // Sort the remaining 3 numbers in stack A
+    sort_three(stack_a);
+    
+    // Push back all numbers from B to A in sorted order
+    while (*stack_b)
+    {
+        get_position_stack(*stack_a, *stack_b);
+        get_target_position_stack(*stack_a, *stack_b);
+        get_cost_stack(*stack_a, *stack_b);
+        get_cheapest_move(stack_a, stack_b);
+    }
+    
+    // Rotate stack A to put the smallest number on top
+    get_position_stack(*stack_a, NULL);
+    int min_pos = get_min_index(*stack_a);
+    int size_a = stack_size(*stack_a);
+    
+    if (min_pos > size_a / 2)
+        while (min_pos < size_a--)
+            rra(stack_a);
+    else
+        while (min_pos-- > 0)
+            ra(stack_a);
 }

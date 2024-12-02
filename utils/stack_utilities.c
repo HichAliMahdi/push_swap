@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 02:13:39 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:08:48 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,75 @@ int	stack_size(t_stack *stack)
 	return (size);
 }
 
-int	ft_atoi(const char *str, t_stack **stack)
+void	get_position_stack(t_stack *stack_a, t_stack *stack_b)
 {
-	int		sign;
-	long	result;
+	t_stack *current;
+	int position;
 
-	sign = 1;
-	result = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n'
-		|| *str == '\v' || *str == '\f' || *str == '\r')
-		str++;
-	if (*str == '-' || *str == '+')
+	position = 0;
+	current = stack_a;
+	while (current)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		current->pos = position++;
+		current = current->next;
 	}
-	while (*str >= '0' && *str <= '9')
+	if (stack_b)
 	{
-		result = result * 10 + (*str - '0');
-		str++;
-		if (result * sign > INT_MAX)
-			handle_error(stack);
-		if (result * sign < INT_MIN)
-			handle_error(stack);
+		current = stack_b;
+		position = 0;
+		while (current)
+		{
+			current->pos = position++;
+			current = current->next;
+		}
 	}
-	return ((int)(result * sign));
 }
 
-int	has_duplicate(t_stack *stack, int value)
+void	chose_and_do_rr_or_r(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b)
 {
-	while (stack)
-	{
-		if (stack->value == value)
-			return (1);
-		stack = stack->next;
-	}
-	return (0);
+    while (cost_a > 0 && cost_b > 0)
+    {
+        rr(stack_a, stack_b);
+        cost_a--;
+        cost_b--;
+    }
+    while (cost_a < 0 && cost_b < 0)
+    {
+        rrr(stack_a, stack_b);
+        cost_a++;
+        cost_b++;
+    }
+    while (cost_a > 0)
+    {
+        ra(stack_a);
+        cost_a--;
+    }
+    while (cost_a < 0)
+    {
+        rra(stack_a);
+        cost_a++;
+    }
+    while (cost_b > 0)
+    {
+        rb(stack_b);
+        cost_b--;
+    }
+    while (cost_b < 0)
+    {
+        rrb(stack_b);
+        cost_b++;
+    }
+}
+
+int is_stacks_sort(t_stack *stack_a, t_stack *stack_b)
+{
+    if (stack_b)
+        return (0);
+    while (stack_a && stack_a->next)
+    {
+        if (stack_a->value > stack_a->next->value)
+            return (0);
+        stack_a = stack_a->next;
+    }
+    return (1);
 }

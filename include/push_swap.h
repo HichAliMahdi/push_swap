@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 02:33:34 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:07:15 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ typedef struct s_stack
 {
 	int				value;
 	int				index;
+	int				cost_a;
+	int				cost_b;
+	int				pos;
+	int				target_pos;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -46,15 +50,22 @@ void	print_stack(t_stack *stack);
 int		is_sorted(t_stack *stack);
 void	free_stack(t_stack *stack);
 
+// Utilities
+int		has_duplicate(t_stack *stack, int value);
+int		ft_atoi(const char *str, t_stack **stack);
+int 	ft_abs(int n);
+
 // Stack Utils
 int		stack_size(t_stack *stack);
-int		ft_atoi(const char *str, t_stack **stack);
-int		has_duplicate(t_stack *stack, int value);
+void	get_position_stack(t_stack *stack_a, t_stack *stack_b);
+void	get_target_position_stack(t_stack *stack_a, t_stack *stack_b);
+void	chose_and_do_rr_or_r(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b);
+int 	is_stacks_sort(t_stack *stack_a, t_stack *stack_b);
+void	create_stack_b(t_stack **stack_a, t_stack **stack_b);
 
 // Sorting utils
 int		find_position(t_stack *stack, int value);
 int		find_min(t_stack *stack);
-int		find_max(t_stack *stack);
 
 // Sorting
 void	sort_three(t_stack **stack);
@@ -63,9 +74,6 @@ void	sort_five(t_stack **stack_a, t_stack **stack_b);
 void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 
 // Sorting large
-int		get_chunk_size(int size);
-void	push_chunks(t_stack **stack_a, t_stack **stack_b, int chunk_size);
-void	push_sorted(t_stack **stack_a, t_stack **stack_b);
 void	sort_large(t_stack **stack_a, t_stack **stack_b);
 
 // Main logic

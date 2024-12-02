@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 02:02:21 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:02:53 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,4 @@ int	find_min(t_stack *stack)
 		stack = stack->next;
 	}
 	return (min);
-}
-
-int	find_max(t_stack *stack)
-{
-	int	max;
-
-	max = INT_MIN;
-	while (stack)
-	{
-		if (stack->value > max)
-			max = stack->value;
-		stack = stack->next;
-	}
-	return (max);
 }
