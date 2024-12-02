@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:04:29 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 11:18:46 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:39:20 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,21 @@ int	has_duplicate(t_stack *stack, int value)
 	return (0);
 }
 
-int ft_abs(int n)
+int	ft_abs(int n)
 {
-    if (n < 0)
-        return (-n);
-    return (n);
+	if (n < 0)
+		return (-n);
+	return (n);
 }
 
-void create_stack_b(t_stack **stack_a, t_stack **stack_b)
+void	create_stack_b(t_stack **stack_a, t_stack **stack_b)
 {
-    int size;
+	int	size;
 
-    size = stack_size(*stack_a);
-    while (size > 3)
-    {
-        pb(stack_a, stack_b);
-        size--;
-    }
+	size = stack_size(*stack_a);
+	while (size > 3)
+	{
+		pb(stack_a, stack_b);
+		size--;
+	}
 }
