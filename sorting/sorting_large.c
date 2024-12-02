@@ -6,34 +6,11 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 16:06:54 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:10:33 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-static int	get_min_index(t_stack *stack)
-{
-	t_stack	*current;
-	int		min_value;
-	int		min_index;
-
-	if (!stack)
-		return (0);
-	current = stack;
-	min_value = current->value;
-	min_index = current->pos;
-	while (current)
-	{
-		if (current->value < min_value)
-		{
-			min_value = current->value;
-			min_index = current->pos;
-		}
-		current = current->next;
-	}
-	return min_index;
-}
 
 void	get_target_position_stack(t_stack *stack_a, t_stack *stack_b)
 {
@@ -111,21 +88,8 @@ static void	get_cheapest_move(t_stack **stack_a, t_stack **stack_b)
 	pa(stack_a, stack_b);
 }
 
-void	sort_large(t_stack **stack_a, t_stack **stack_b)
+void	process_stack_b(t_stack **stack_a, t_stack **stack_b)
 {
-	int	size;
-	int	pushed;
-	int	min_pos;
-	int	size_a;
-
-	size = stack_size(*stack_a);
-	pushed = 0;
-	while (size > 3 && pushed < size - 3)
-	{
-		pb(stack_a, stack_b);
-		pushed++;
-	}
-	sort_three(stack_a);
 	while (*stack_b)
 	{
 		get_position_stack(*stack_a, *stack_b);
@@ -133,13 +97,20 @@ void	sort_large(t_stack **stack_a, t_stack **stack_b)
 		get_cost_stack(*stack_a, *stack_b);
 		get_cheapest_move(stack_a, stack_b);
 	}
+}
+
+void	sort_large(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size;
+	int	min_pos;
+	int	size_a;
+
+	size = stack_size(*stack_a);
+	push_to_b_until_size(stack_a, stack_b, size);
+	sort_three(stack_a);
+	process_stack_b(stack_a, stack_b);
 	get_position_stack(*stack_a, NULL);
 	min_pos = get_min_index(*stack_a);
 	size_a = stack_size(*stack_a);
-	if (min_pos > size_a / 2)
-		while (min_pos < size_a--)
-			rra(stack_a);
-	else
-		while (min_pos-- > 0)
-			ra(stack_a);
+	rotate_stack_to_min_pos(stack_a, min_pos, size_a);
 }

@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 19:29:07 by hali-mah          #+#    #+#              #
-#    Updated: 2024/12/02 11:15:28 by hali-mah         ###   ########.fr        #
+#    Updated: 2024/12/02 17:02:25 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SOR_FILES = $(SORTING_DIR)/sorting_logic.c \
 
 UTI_FILES = $(UTILS_DIR)/stack_utilities.c \
 			$(UTILS_DIR)/utilities.c \
+			$(UTILS_DIR)/rotate_utils.c \
+			$(UTILS_DIR)/sort_large_utils.c \
 			$(UTILS_DIR)/sorting_utils.c
 
 # Main source file

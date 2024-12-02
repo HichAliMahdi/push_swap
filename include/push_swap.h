@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 13:07:15 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:11:00 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,32 @@ void	free_stack(t_stack *stack);
 // Utilities
 int		has_duplicate(t_stack *stack, int value);
 int		ft_atoi(const char *str, t_stack **stack);
-int 	ft_abs(int n);
+int		ft_abs(int n);
+
+// Rotation utilities
+void	do_rr_operations(t_stack **stack_a, t_stack **stack_b,
+			int *cost_a, int *cost_b);
+void	do_single_operations(t_stack **stack, int *cost, void (*op)(t_stack **),
+			void (*reverse_op)(t_stack **));
+void	chose_and_do_rr_or_r(t_stack **stack_a,
+			t_stack **stack_b, int cost_a, int cost_b);
+
+// Sort large utils
+void	push_to_b_until_size(t_stack **stack_a, t_stack **stack_b, int size);
+void	rotate_stack_to_min_pos(t_stack **stack_a, int min_pos, int size_a);
+void	process_stack_b(t_stack **stack_a, t_stack **stack_b);
 
 // Stack Utils
 int		stack_size(t_stack *stack);
 void	get_position_stack(t_stack *stack_a, t_stack *stack_b);
 void	get_target_position_stack(t_stack *stack_a, t_stack *stack_b);
-void	chose_and_do_rr_or_r(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b);
-int 	is_stacks_sort(t_stack *stack_a, t_stack *stack_b);
+int		is_stacks_sort(t_stack *stack_a, t_stack *stack_b);
 void	create_stack_b(t_stack **stack_a, t_stack **stack_b);
 
 // Sorting utils
 int		find_position(t_stack *stack, int value);
 int		find_min(t_stack *stack);
+int		get_min_index(t_stack *stack);
 
 // Sorting
 void	sort_three(t_stack **stack);
