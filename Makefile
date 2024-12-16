@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 19:29:07 by hali-mah          #+#    #+#              #
-#    Updated: 2024/12/15 16:54:01 by hali-mah         ###   ########.fr        #
+#    Updated: 2024/12/16 11:59:26 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 OPERATIONS_DIR = operations
 SORTING_DIR = sorting
 UTILS_DIR = utils
+LIBFT_DIR = libft
 PRINTF_DIR = ft_printf
 
 # Source files
@@ -33,9 +34,7 @@ SOR_FILES = $(SORTING_DIR)/sorting_logic.c \
 UTI_FILES = $(UTILS_DIR)/stack_utilities.c \
 			$(UTILS_DIR)/utilities.c \
 			$(UTILS_DIR)/rotate_utils.c \
-			$(UTILS_DIR)/ft_split.c \
 			$(UTILS_DIR)/args_utils.c \
-			$(UTILS_DIR)/libft.c \
 			$(UTILS_DIR)/sort_large_utils.c \
 			$(UTILS_DIR)/sorting_utils.c
 
@@ -49,13 +48,17 @@ SRCS = $(SRC) $(OPE_FILES) $(SOR_FILES) $(UTI_FILES)
 OBJ = $(SRCS:.c=.o)
 
 # Library
+LIBFT = $(LIBFT_DIR)/libft.a
 LIBFTPRINTF = $(PRINTF_DIR)/libftprintf.a
 
 # Output name
-$(NAME): $(OBJ) $(LIBFTPRINTF)
-	$(CC) $(OBJ) -o $(NAME) -L$(PRINTF_DIR) -lftprintf
+$(NAME): $(OBJ) $(LIBFT) $(LIBFTPRINTF)
+	$(CC) $(OBJ) -o $(NAME) -L$(PRINTF_DIR) -lftprintf -L$(LIBFT_DIR) -lft
 
 # Rule to build ft_printf
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
 $(LIBFTPRINTF):
 	make -C $(PRINTF_DIR)
 
@@ -66,12 +69,14 @@ $(LIBFTPRINTF):
 # Clean object files
 clean:
 	rm -f $(OBJ)
-	make -C $(PRINTF_DIR) clean  # Clean ft_printf objects
+	make -C $(LIBFT_DIR) clean
+	make -C $(PRINTF_DIR) clean
 
 # Remove compiled executable
 fclean: clean
 	rm -f $(NAME)
-	make -C $(PRINTF_DIR) fclean  # Clean ft_printf executable
+	make -C $(LIBFT_DIR) fclean
+	make -C $(PRINTF_DIR) fclean
 
 # Rebuild everything
 re: fclean $(NAME)

@@ -6,11 +6,11 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:45:26 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/15 16:51:14 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:49:59 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "libft.h"
 
 static int	ft_count_words(const char *s, char c)
 {

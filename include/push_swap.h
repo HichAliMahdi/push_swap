@@ -6,13 +6,14 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/16 11:32:30 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:57:49 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -54,11 +55,6 @@ void	free_stack(t_stack *stack);
 int		has_duplicate(t_stack *stack, int value);
 int		ft_atoi(const char *str, t_stack **stack);
 int		ft_abs(int n);
-char	*ft_strdup(const char *str);
-size_t	ft_strlcpy(char *dst, const char *src, size_t destsize);
-char	*ft_substr(char const *s, int start, size_t len);
-char	*ft_strchr(const char *s, int c);
-char	**ft_split(char const *s, char c);
 
 // Rotation utilities
 void	do_rr_operations(t_stack **stack_a, t_stack **stack_b,
