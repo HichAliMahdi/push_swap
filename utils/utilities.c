@@ -6,37 +6,52 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:04:29 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/16 11:30:08 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:38:37 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
+// Helper function to handle the main conversion and checks
+static long	parse_number(const char *str, int *i, int *sign, t_stack **stack)
+{
+	long	result;
+
+	result = 0;
+	if (str[*i] == '-' || str[*i] == '+')
+	{
+		if (str[*i] == '-')
+			*sign = -1;
+		else
+			*sign = 1;
+		(*i)++;
+	}
+	if (!str[*i])
+		handle_error(stack);
+	while (str[*i])
+	{
+		if (str[*i] < '0' || str[*i] > '9')
+			handle_error(stack);
+		result = result * 10 + (str[*i] - '0');
+		if (result * (*sign) > INT_MAX || result * (*sign) < INT_MIN)
+			handle_error(stack);
+		(*i)++;
+	}
+	return (result);
+}
+
 int	ft_atoi(const char *str, t_stack **stack)
 {
 	int		sign;
 	long	result;
+	int		i;
 
 	sign = 1;
-	result = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n'
-		|| *str == '\v' || *str == '\f' || *str == '\r')
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-		if (result * sign > INT_MAX)
-			handle_error(stack);
-		if (result * sign < INT_MIN)
-			handle_error(stack);
-	}
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	result = parse_number(str, &i, &sign, stack);
 	return ((int)(result * sign));
 }
 

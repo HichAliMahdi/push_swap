@@ -6,26 +6,38 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:47:08 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/15 17:03:53 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:41:48 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
+static int	validate_string(char *str)
+{
+	char	*tmp;
+	int		found_digit;
+
+	tmp = str;
+	found_digit = 0;
+	while (*tmp)
+	{
+		if (*tmp != ' ' && (*tmp < '0'
+				|| *tmp > '9') && *tmp != '-' && *tmp != '+')
+			return (0);
+		if (*tmp >= '0' && *tmp <= '9')
+			found_digit = 1;
+		tmp++;
+	}
+	return (found_digit);
+}
+
 char	**split_args(char *str)
 {
 	char	**result;
-	char	*tmp;
 	int		i;
 
-	tmp = str;
-	while (*tmp)
-	{
-		if (*tmp != ' ' && (*tmp < '0' || *tmp > '9')
-			&& *tmp != '-' && *tmp != '+')
-			return (NULL);
-		tmp++;
-	}
+	if (!validate_string(str))
+		return (NULL);
 	result = ft_split(str, ' ');
 	if (!result)
 		return (NULL);

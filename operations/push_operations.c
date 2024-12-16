@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/11/30 04:52:53 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:54:40 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
+// Push the top element of stack a to stack b
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*top;
