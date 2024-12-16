@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/02 16:52:36 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:32:21 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,4 @@ void	get_position_stack(t_stack *stack_a, t_stack *stack_b)
 			current = current->next;
 		}
 	}
-}
-
-int	is_stacks_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	if (stack_b)
-		return (0);
-	while (stack_a && stack_a->next)
-	{
-		if (stack_a->value > stack_a->next->value)
-			return (0);
-		stack_a = stack_a->next;
-	}
-	return (1);
 }

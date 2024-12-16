@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:18:00 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/12/15 17:04:05 by hali-mah         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:32:30 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void	process_stack_b(t_stack **stack_a, t_stack **stack_b);
 int		stack_size(t_stack *stack);
 void	get_position_stack(t_stack *stack_a, t_stack *stack_b);
 void	get_target_position_stack(t_stack *stack_a, t_stack *stack_b);
-int		is_stacks_sort(t_stack *stack_a, t_stack *stack_b);
-void	create_stack_b(t_stack **stack_a, t_stack **stack_b);
 
 // Sorting utils
 int		find_position(t_stack *stack, int value);
